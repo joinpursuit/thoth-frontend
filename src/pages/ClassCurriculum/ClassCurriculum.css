@@ -1,0 +1,48 @@
+.curriculum {
+  padding: 20px;
+}
+
+.curriculum-header {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.module-form {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.topic-form {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.form-button {
+  display: inline-block;
+  background: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background: #45a049;
+}

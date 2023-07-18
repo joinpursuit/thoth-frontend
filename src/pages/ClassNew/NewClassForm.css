@@ -1,0 +1,45 @@
+/* NewClassForm.css */
+
+.NewClassForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.NewClassForm h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.NewClassForm label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.NewClassForm input,
+.NewClassForm select {
+  height: 35px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.NewClassForm button {
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+.NewClassForm button:hover {
+  background-color: #0056b3;
+}

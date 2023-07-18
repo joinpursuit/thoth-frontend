@@ -1,0 +1,44 @@
+.user-dashboard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.user-dashboard h2 {
+  color: #333;
+  margin: 20px 0;
+}
+
+.class-card-container {
+  display: flex;
+  width: 100%;
+}
+
+.class-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.class-card:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.class-card:active {
+  transform: scale(0.98);
+}
+
+.class-card a {
+  color: black;
+}

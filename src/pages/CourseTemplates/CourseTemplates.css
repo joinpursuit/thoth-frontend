@@ -1,0 +1,29 @@
+.course-templates {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.course-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #333;
+  color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-card-link {
+  text-decoration: none;
+  color: white;
+}
+
+.course-card-title {
+  text-align: center;
+}

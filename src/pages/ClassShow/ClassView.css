@@ -1,0 +1,40 @@
+.class-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.class-view-header {
+  font-size: 2em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.class-view-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.class-view-card-header {
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.class-view-card-description {
+  text-align: center;
+}
