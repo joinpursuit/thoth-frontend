@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { getAuth } from 'firebase/auth';
 import './PageWrapper.css';
 import { Link } from 'react-router-dom';
 

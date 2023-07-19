@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-import ReactMarkdown from "react-markdown";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -14,12 +13,10 @@ const API = process.env.REACT_APP_API_URL;
 let codeTimer = null;
 
 const Workspace = (props) => {
-  const { topicId, exerciseId } = useParams();
+  const { exerciseId } = useParams();
 
   const [submission, setSubmission] = useState(null);
   const [problem, setProblem] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [chatMessage, setChatMessage] = useState("");
   const [currentView, setCurrentView] = useState("problem");
   const [lastRunResults, setLastRunResults] = useState([]);
   const [submitting, setSubmitting] = useState(false);
@@ -39,7 +36,7 @@ const Workspace = (props) => {
     }
 
     getData();
-  }, []);
+  }, [exerciseId]);
 
   const onCodeUpdate = (code) => {
     clearTimeout(codeTimer);

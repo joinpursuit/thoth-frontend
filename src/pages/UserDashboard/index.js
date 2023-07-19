@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getAuth } from 'firebase/auth';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './UserDashboard.css';
 
 const API_URL = process.env.REACT_APP_API_URL;
