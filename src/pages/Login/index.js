@@ -10,7 +10,7 @@ const LoginPage = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();  
 
   if(currentUser) {
-    navigate("/modules");
+    navigate("/dashboard");
   }
 
   const getOrCreateNewUser = useCallback(async (firebaseUser) => {

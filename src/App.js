@@ -38,12 +38,12 @@ function App() {
 
   const [uid, setUID] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     auth.onAuthStateChanged(user => {
       axios.interceptors.request.use(
         async config => {
-          console.log(user);
           if (user) {
             const token = await user.getIdToken();
             config.headers.Authorization = `Bearer ${token}`;
@@ -57,6 +57,7 @@ function App() {
       );
 
       setCurrentUser(user);
+      setLoading(false);
     });
   }, []);
 
@@ -158,7 +159,15 @@ function App() {
       path: "/classes/:classId/modules/:moduleId/topics/:topicId/exercises/:exerciseId",
       element: wrapWithHeader(<Workspace />)
     }
-  ])
+  ]);
+
+  if(loading) {
+    return (
+      <div className="App">
+        Loading...
+      </div>
+    )
+  }
 
   return (
     <div className="App">

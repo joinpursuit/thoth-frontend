@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import './PageWrapper.css';
 import { Link } from 'react-router-dom';
 
-const PageWrapper = ({ children, currentUser }) => {
+const PageWrapper = ({ children, currentUser, loginRequired=false }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const PageWrapper = ({ children, currentUser }) => {
     )
   }
 
-  if(!currentUser) {
+  if(!currentUser && loginRequired) {
     return (
       <div>
         Loading...
