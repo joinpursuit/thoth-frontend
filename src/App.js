@@ -29,6 +29,9 @@ import UserDashboard from "./pages/UserDashboard";
 import ClassModules from "./pages/ClassModules";
 import TopicExercises from "./pages/TopicsExercises";
 
+// Needed to initialize app
+import firebase from "./firebase";
+
 function App() {
 
   const auth = getAuth();
