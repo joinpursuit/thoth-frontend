@@ -34,7 +34,7 @@ const LoginPage = ({ currentUser, setCurrentUser }) => {
         console.log(error);
       })
     
-  }, [currentUser, getOrCreateNewUser])
+  }, [getOrCreateNewUser])
 
   const onButtonClick = () => {
     const auth = getAuth();
