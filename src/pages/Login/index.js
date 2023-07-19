@@ -1,30 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './LoginPage.css';
 
-import firebase from "../../firebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 
 const LoginPage = ({ currentUser, setCurrentUser }) => {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
-  const getOrCreateNewUser = async (firebaseUser) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/create`, { 
+  if(currentUser) {
+    navigate("/modules");
+  }
+
+  const getOrCreateNewUser = useCallback(async (firebaseUser) => {
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/users/create`, { 
       firebaseId: firebaseUser.uid, 
       email: firebaseUser.email 
     });
     setCurrentUser(firebaseUser)
-  }
+  }, [setCurrentUser]);
 
   useEffect(() => {
     const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-
-    if(currentUser) {
-      navigate("/modules");
-    }
 
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
@@ -36,7 +34,7 @@ const LoginPage = ({ currentUser, setCurrentUser }) => {
         console.log(error);
       })
     
-  }, [])
+  }, [currentUser, getOrCreateNewUser])
 
   const onButtonClick = () => {
     const auth = getAuth();
