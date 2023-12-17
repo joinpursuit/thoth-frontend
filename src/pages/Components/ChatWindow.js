@@ -33,7 +33,7 @@ const ChatWindow = ({ exerciseId, submissionId }) => {
     e.preventDefault();
     let value = chatMessage;
     setChatMessage("");
-    let nextMessages = [...chatLog, { content: chatMessage, userId: "exists" }];
+    let nextMessages = [...chatLog, { content: chatMessage, userId: "exists", timestamp: (new Date()).toISOString() }];
     setChatLog([...nextMessages]);
     axios.post(`${API}/api/exercises/${exerciseId}/submissions/${submissionId}/messages`, { content: value }).then(({data}) => {
       setChatLog([...nextMessages, data]);
