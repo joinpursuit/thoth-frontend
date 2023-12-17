@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Markdown from "react-markdown";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -60,7 +61,8 @@ const ChatWindow = ({ exerciseId, submissionId }) => {
         chatLog.map((message, i) => (
           <div key={i} className={`chat-message chat-message-${message.userId ? "human" : "bot"}`}>
             <div className="chat-message-content">
-              {message.content}
+              <Markdown>{message.content}</Markdown>
+              {/* {message.content} */}
             </div>
             <div className="chat-message-timestamp">
               {new Date(message.timestamp).toLocaleTimeString()}

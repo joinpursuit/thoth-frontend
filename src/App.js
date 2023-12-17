@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { getAuth } from "firebase/auth";
+import { useEffect, useState } from "react";
 
 import LoginRequired from "./pages/LoginRequired";
 
@@ -16,7 +17,6 @@ import AdminDashboard from "./pages/AdminDash";
 import ModuleTopics from "./pages/ModuleTopics";
 
 import "./App.css";
-import { useEffect, useState } from "react";
 import CourseTemplates from "./pages/CourseTemplates";
 import CreateCourseTemplate from "./pages/NewCourseTemplate";
 import CourseTemplateEditForm from "./pages/CourseTemplateEditForm";

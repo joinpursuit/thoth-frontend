@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import AceEditor from "react-ace";
+import Markdown from "react-markdown";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
-import TestEntry from "./Components/TestEntry";
 
+import TestEntry from "./Components/TestEntry";
 import Loading from "./Loading";
 import ChatWindow from "./Components/ChatWindow";
 
@@ -13,14 +14,16 @@ const API = process.env.REACT_APP_API_URL;
 let codeTimer = null;
 
 const Workspace = (props) => {
-  const { exerciseId } = useParams();
+  const { exerciseId, classId, moduleId, topicId } = useParams();
 
   const [submission, setSubmission] = useState(null);
   const [problem, setProblem] = useState(null);
   const [currentView, setCurrentView] = useState("problem");
-  const [lastRunResults, setLastRunResults] = useState([]);
+  const [lastRunResults, setLastRunResults] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [chatWindowActive, setChatWindowActive] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getData() {
@@ -40,14 +43,25 @@ const Workspace = (props) => {
 
   const onCodeUpdate = (code) => {
     clearTimeout(codeTimer);
-    codeTimer = setTimeout(async () => {
-      await axios.put(`${API}/api/exercises/${exerciseId}/submissions/${submission.id}`, { content: code });
-    }, 2000);
     setSubmission({
       ...submission,
       content: code,
     })
+    setSubmitting(true);
   }
+
+  useEffect(() => {
+    if(submission) {
+      setSubmitting(false);
+      codeTimer = setTimeout(async () => {
+        await axios.put(
+          `${API}/api/exercises/${exerciseId}/submissions/${submission.id}`, 
+          { content: submission.content }
+        );
+        
+      }, 1000);
+    }
+  }, [submission])
 
   const onTabClick = (tab) => {
     return (e) => {
@@ -67,7 +81,9 @@ const Workspace = (props) => {
     axios.post(`${API}/api/exercises/${exerciseId}/submissions/${submission.id}/run`).then(({data}) => {
       setLastRunResults(data);
       setSubmitting(false);
-      alert(`${data.filter((result) => result.passing).length} / ${data.length} tests passed!`);
+      if(data.failed.length === 0) {
+        navigate(`/classes/${classId}/modules/${moduleId}/topics/${topicId}/exercises`)
+      }
     });
   }
 
@@ -75,7 +91,7 @@ const Workspace = (props) => {
     return (
       <>
         <h3>{ problem.name }</h3>
-        <p>{ problem.content }</p>
+        <Markdown>{ problem.content }</Markdown>
       </>
     )
   }

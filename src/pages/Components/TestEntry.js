@@ -9,18 +9,20 @@ const TestEntry = ({testEntry, idx, lastRunResults}) => {
     setActive(!active);
   }
 
-  // Hacky way of getting around generative differences between the descriptions in the test data and cases
-  const testCase = lastRunResults?.find(
-    result => result.description === testEntry.description || result.description.includes(testEntry.description)
-  );
+  const passed = (lastRunResults?.passed || []).find(result => result.description === testEntry.description);
+  const failed =( lastRunResults?.failed || []).find(result => result.description === testEntry.description);
+
+  const testCase = passed || failed;
 
   const highlight = testCase ? (
-    testCase.passing ? (
+    passed ? (
       "workspace-test-passing"
     ) : (
       "workspace-test-failing"
     )
   ) : "";
+
+  
 
   return (
     <div className="workspace-test-entry" onClick={onTabClick}>
@@ -34,9 +36,18 @@ const TestEntry = ({testEntry, idx, lastRunResults}) => {
             <p>Input: { JSON.stringify(testEntry.input) }</p>
             <p>Expected: { JSON.stringify(testEntry.expected) }</p>
             {
-              testCase && !testCase.passing ? (
+              testCase?.actual ? (
                 <>
-                  <p>Actual: { JSON.stringify(testCase?.received) }</p>
+                  <p>Actual: { JSON.stringify(testCase.actual) }</p>
+                </>
+              ) : (
+                null
+              )
+            }
+            {
+              testCase && testCase.exception ? (
+                <>
+                  <p>Exception: { testCase.exception }</p>
                 </>
               ) : (
                 null
