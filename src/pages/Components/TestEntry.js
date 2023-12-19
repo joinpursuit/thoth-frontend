@@ -45,7 +45,7 @@ const TestEntry = ({testEntry, idx, lastRunResults}) => {
               )
             }
             {
-              testCase && testCase.exception ? (
+              testCase?.exception ? (
                 <>
                   <p>Exception: { testCase.exception }</p>
                 </>

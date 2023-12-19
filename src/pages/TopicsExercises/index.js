@@ -45,11 +45,17 @@ const TopicExercises = () => {
         {loading ? 'Creating...' : '+ Create New Exercise'}
       </div>
       <div className="topic-exercises">
-        {exercises.map(exercise => (
-          <div className="exercise-card" onClick={() => onExerciseClick(exercise.id)}>
-            <h3 className="exercise-title">{exercise.name}</h3>
-          </div>
-        ))}
+        {exercises.map(exercise => {
+
+          const hasSubmission = exercise.submissions.length > 0;
+          const completed = hasSubmission && exercise.submissions[0].passing;
+
+          return (
+            <div className={`exercise-card ${hasSubmission && !completed ? "in-progress" : ""} ${completed ? "completed" : ""}`} onClick={() => onExerciseClick(exercise.id)}>
+              <h3 className="exercise-title">{exercise.name}</h3>
+            </div>
+          )})
+        }
       </div>
     </div>
   );
