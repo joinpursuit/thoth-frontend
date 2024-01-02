@@ -20,6 +20,11 @@ const ChatWindow = ({ exerciseId, submissionId }) => {
       });
   }, [exerciseId, submissionId]);
 
+  useEffect(() => {
+    const chatWindow = document.querySelector(".chat-window-body");
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }, [chatLog])
+
   const onMinimize = () => {
     setMinimize(!minimize);
   }

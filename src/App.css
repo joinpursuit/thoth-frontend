@@ -291,6 +291,8 @@ h3.section-header {
   font-size: 20px;
 
   cursor: pointer;
+
+  color: white;
 }
 
 .chat-window {
@@ -388,4 +390,28 @@ h3.section-header {
 
 .content-container {
   padding: 20px;
+}
+
+.main-file-controls {
+  padding: 10px;
+
+  & span {
+    padding: 5px;
+    background-color: #AAA;
+    border-radius: 3px;
+  }
+}
+
+.workspace-file-tabs {
+  display: flex;
+}
+
+.workspace-file-tab {
+  padding: 5px;
+  font-size: 0.8em;
+  background-color: #AAA;
+}
+
+.workspace-file-tab.active {
+  background-color: #FF0;
 }
