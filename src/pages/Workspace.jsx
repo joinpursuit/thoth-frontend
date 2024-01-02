@@ -54,7 +54,6 @@ const Workspace = (props) => {
     // When first loading the submission, set the open files
     if(submission) {
       const fileIndex = submission.files.findIndex(file => file.fileName === "index.js");
-      const file = submission.files[fileIndex];
 
       setOpenFiles([submission.files[fileIndex]]);
       setCurrentFile(fileIndex);
@@ -67,6 +66,7 @@ const Workspace = (props) => {
 
   useEffect(() => {
     reloadFiles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextFile, exerciseId]);
 
   const onCodeUpdate = (code) => {
@@ -95,6 +95,7 @@ const Workspace = (props) => {
         setSubmitting(false);
       }, 1000);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentContent, submitting, exerciseId, submission?.id])
 
   const onTabClick = (tab) => {
