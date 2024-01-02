@@ -47,7 +47,7 @@ const TopicExercises = () => {
       <div className="topic-exercises">
         {exercises.map(exercise => {
 
-          const hasSubmission = exercise.submissions.length > 0;
+          const hasSubmission = (exercise?.submissions?.length || 0) > 0;
           const completed = hasSubmission && exercise.submissions[0].passing;
 
           return (
