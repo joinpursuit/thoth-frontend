@@ -1,0 +1,35 @@
+.file {
+  display: flex;
+  font-size: 1.1em;
+  padding: 10px;
+
+  &:hover {
+    background-color: #AAA;
+  }
+
+  & .file-details {
+    flex: 1;
+    margin-right: 5px;
+  }
+
+  & .file-controls {
+    display: flex;
+
+    & > div {
+      margin-right: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: #FF0;
+      }
+
+      & i {
+        font-size: 0.8em;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
