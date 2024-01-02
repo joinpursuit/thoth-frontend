@@ -3,13 +3,13 @@ import axios from "axios";
 import { useParams } from 'react-router';
 import './ClassMembers.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ClassMembers = () => {
   const [members, setMembers] = useState([]);
   const [invitations, setInvitations] = useState([]);
   const [email, setEmail] = useState('');
   const { id } = useParams();
-
-  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchMembersAndInvitations = async () => {

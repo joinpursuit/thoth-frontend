@@ -3,12 +3,12 @@ import axios from 'axios';
 
 import "./NewClassForm.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const NewClassForm = () => {
   const [className, setClassName] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('');
   const [courseTemplates, setCourseTemplates] = useState([]);
-
-  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchCourseTemplates = async () => {

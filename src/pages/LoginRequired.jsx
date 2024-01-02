@@ -10,6 +10,7 @@ export default function LoginRequired(props) {
     if(!props.currentUser) {
       navigate("/login");
     }
+    // eslint-disable-next-line
   }, [props.currentUser])
   
   return (

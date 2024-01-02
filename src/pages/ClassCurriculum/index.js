@@ -4,12 +4,12 @@ import axios from 'axios';
 import './ClassCurriculum.css';
 import { toast } from 'react-toastify';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ClassCurriculum = () => {
   const [className, setClassName] = useState('');
   const [modules, setModules] = useState([]);
   const { id } = useParams();
-
-  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchClassData = async () => {

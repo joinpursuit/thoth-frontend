@@ -30,13 +30,12 @@ import ClassModules from "./pages/ClassModules";
 import TopicExercises from "./pages/TopicsExercises";
 
 // Needed to initialize app
+// eslint-disable-next-line no-unused-vars
 import firebase from "./firebase";
 
+const auth = getAuth();
+
 function App() {
-
-  const auth = getAuth();
-
-  const [uid, setUID] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -81,12 +80,12 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: wrapWithHeader(<LandingPage userId={uid} />)
+      element: wrapWithHeader(<LandingPage userId={currentUser?.uid} />)
     },
     {
       path: "/login",
       element: wrapWithHeader(<LoginPage 
-        userId={uid} 
+        userId={currentUser?.uid} 
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
       />)

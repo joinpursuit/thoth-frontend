@@ -56,13 +56,14 @@ const Workspace = (props) => {
       const fileIndex = submission.files.findIndex(file => file.fileName === "index.js");
 
       setOpenFiles([submission.files[fileIndex]]);
-      setCurrentFile(fileIndex);
     }
   }, [submission])
 
   useEffect(() => {
-    setCurrentContent(currentFile.content);
-  }, [currentFile])
+    if(currentFile >= 0 && currentFile < openFiles.length) {
+      setCurrentContent(openFiles[currentFile].content);
+    }
+  }, [currentFile, openFiles]);
 
   useEffect(() => {
     reloadFiles();
@@ -138,7 +139,7 @@ const Workspace = (props) => {
         {  
           testData.map((data, i) => {
             return (
-              <TestEntry testEntry={data} idx={i + 1} lastRunResults={lastRunResults} />
+              <TestEntry key={data.input} testEntry={data} idx={i + 1} lastRunResults={lastRunResults} />
             )
           })
         }
@@ -253,7 +254,7 @@ const Workspace = (props) => {
           {
             openFiles.map((file, i) => {
               return (
-                <div className={`workspace-file-tab ${i === currentFile ? "active" : ""}`} onClick={() => onFileSelect(file)}>
+                <div key={file.id} className={`workspace-file-tab ${i === currentFile ? "active" : ""}`} onClick={() => onFileSelect(file)}>
                   {file.fileName}
                 </div>
               );
@@ -275,7 +276,7 @@ const Workspace = (props) => {
           <ChatWindow exerciseId={problem.id} submissionId={submission.id} />
         ) : (
           <div className="chat-toggle" onClick={() => setChatWindowActive(true)}>
-            <i class="fa-solid fa-comment"></i>
+            <i className="fa-solid fa-comment"></i>
           </div>
         )
       }

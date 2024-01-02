@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import ClassCard from './ClassCard.jsx';
 import './ClassesIndex.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ClassesIndex = () => {
   const [classes, setClasses] = useState([]);
-  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchClasses = async () => {

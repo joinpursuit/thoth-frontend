@@ -4,12 +4,12 @@ import axios from "axios";
 import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const CourseTemplateEditForm = () => {
   const [courseName, setCourseName] = useState('');
   const [moduleTemplates, setModuleTemplates] = useState([]);
   const { id } = useParams();
-
-  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchModuleTemplates = async () => {
