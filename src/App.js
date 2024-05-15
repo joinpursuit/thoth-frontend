@@ -60,16 +60,21 @@ function App() {
     });
   }, []);
 
+  function logout() {
+    auth.signOut();
+    setCurrentUser(null);
+  }
+
   function wrapWithHeader(component, loginRequired=false) {
     return (
       loginRequired ? (
         <LoginRequired>
-          <PageWrapper currentUser={currentUser}>
+          <PageWrapper currentUser={currentUser} logout={logout}>
             { component }
           </PageWrapper>
         </LoginRequired>
       ) : (
-        <PageWrapper currentUser={currentUser}>
+        <PageWrapper currentUser={currentUser} logout={logout}>
           { component }
         </PageWrapper>
       )

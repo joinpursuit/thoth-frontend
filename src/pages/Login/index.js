@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './LoginPage.css';
@@ -13,37 +13,68 @@ const LoginPage = ({ currentUser, setCurrentUser }) => {
     navigate("/dashboard");
   }
 
-  const getOrCreateNewUser = useCallback(async (firebaseUser) => {
-    await axios.post(`${process.env.REACT_APP_API_URL}/api/users/create`, { 
-      firebaseId: firebaseUser.uid, 
-      email: firebaseUser.email 
-    });
-    setCurrentUser(firebaseUser)
-  }, [setCurrentUser]);
+  const login = async () => {
+    const auth = getAuth();
+    console.log(auth.currentUser);
+    if(auth.currentUser) {
+      try {
+        const result = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {
+          email: auth.currentUser.email,
+          firebaseId: auth.currentUser.uid
+        });
+        setCurrentUser(result.data);
+      }
+      catch(e) {
+        signup();
+      }
+    }
+  }
+
+  const signup = async () => {
+    const auth = getAuth();
+    const firebaseUser = auth.currentUser;
+    try {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/users/create`, { 
+        firebaseId: firebaseUser.uid, 
+        email: firebaseUser.email,
+      });
+      setCurrentUser(firebaseUser)
+    }
+    catch(e) {
+      console.log(e);
+    }
+    
+  };
 
   useEffect(() => {
     const auth = getAuth();
 
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        if(auth.currentUser) {
-          getOrCreateNewUser(auth.currentUser); 
+    const keepUserLoggedIn = async () => {
+      if(auth.currentUser && !currentUser) {
+        try {
+          login();
+          await setPersistence(auth, browserLocalPersistence);
         }
-      })
-      .catch(error => {
-        console.log(error);
-      })
-    
-  }, [getOrCreateNewUser])
+        catch(e) {
+          console.log(e);
+        }
+      }
+    }
 
-  const onButtonClick = () => {
+    keepUserLoggedIn();
+
+    if(currentUser) {
+      navigate("/dashboard");
+    }
+    
+  }, [currentUser])
+
+  const onButtonClick = async () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
-    return signInWithPopup(auth, provider)
-      .then((result) => {
-        getOrCreateNewUser(result.user);
-      })
+    await signInWithPopup(auth, provider);
+    login();
   }
 
   return (

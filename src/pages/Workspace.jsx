@@ -45,6 +45,10 @@ const Workspace = (props) => {
       
       setSubmission(currentSub);
       setProblem(exercise);
+
+      if(currentContent === "") {
+        setCurrentContent(exercise.boilerplate);
+      }
     }
 
     getData();
@@ -58,12 +62,6 @@ const Workspace = (props) => {
       setOpenFiles([submission.files[fileIndex]]);
     }
   }, [submission])
-
-  useEffect(() => {
-    if(currentFile >= 0 && currentFile < openFiles.length) {
-      setCurrentContent(openFiles[currentFile].content);
-    }
-  }, [currentFile, openFiles]);
 
   useEffect(() => {
     reloadFiles();
@@ -217,8 +215,6 @@ const Workspace = (props) => {
         return problemView();
       case "tests":
         return testView();
-      case "files":
-        return filesView();
       default:
         return null;
     }
@@ -243,9 +239,9 @@ const Workspace = (props) => {
           <span className={`workspace-tab ${currentView === "tests" ? "active" : ""}`} onClick={onTabClick("tests")}>
             Tests
           </span>
-          <span className={`workspace-tab ${currentView === "files" ? "active" : ""}`} onClick={onTabClick("files")}>
+          {/* <span className={`workspace-tab ${currentView === "files" ? "active" : ""}`} onClick={onTabClick("files")}>
             Files
-          </span>
+          </span> */}
         </div>
         { renderCurrentView() }
       </div>

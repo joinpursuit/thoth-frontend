@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import './PageWrapper.css';
 import { Link } from 'react-router-dom';
 
-const PageWrapper = ({ children, currentUser, loginRequired=false }) => {
+const PageWrapper = ({ children, currentUser, loginRequired=false, logout }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -27,6 +27,12 @@ const PageWrapper = ({ children, currentUser, loginRequired=false }) => {
     navigate("/login");
   }
 
+  const logoutWrapper = (e) => {
+    e.preventDefault();
+    logout();
+    navigate("/");
+  }
+
   function renderProfile() {
     const userData = currentUser.providerData[0];
     return (
@@ -42,7 +48,7 @@ const PageWrapper = ({ children, currentUser, loginRequired=false }) => {
             <a href="/admin">Admin</a>
             <a href="/dashboard">Dashboard</a>
             <a href="/profile-settings">Profile Settings</a>
-            <a href="/logout">Logout</a>
+            <a href="#" onClick={logoutWrapper}>Logout</a>
           </div>
         )}
       </>
